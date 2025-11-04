@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>HomeWeb - Games</title>
+	<style>
+		:root{
+			--bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#5eead4;
+			--glass: rgba(255,255,255,0.03);
+		}
+		*{box-sizing:border-box}
+		body{margin:0;font-family:Inter,Segoe UI,Arial;background:linear-gradient(180deg,#071028 0%, #091427 100%);color:#e6eef6}
+		header{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;border-bottom:1px solid rgba(255,255,255,0.04)}
+		header h1{margin:0;font-size:20px}
+		.layout{display:flex;gap:20px;padding:20px;max-width:1200px;margin:18px auto}
+		/* left profile */
+		.left{width:220px;flex:0 0 220px}
+		.profile-card{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+		.avatar{width:72px;height:72px;border-radius:999px;background:linear-gradient(135deg,var(--accent),#60a5fa);display:flex;align-items:center;justify-content:center;font-weight:700;color:#012; font-size:24px}
+		.name{margin-top:10px;font-weight:600}
+		.bio{color:var(--muted);font-size:13px;margin-top:6px}
+		.stats{display:flex;gap:8px;margin-top:12px}
+		.stat{background:var(--glass);padding:8px;border-radius:8px;flex:1;text-align:center}
+
+		/* center content */
+		.center{flex:1;min-width:0}
+		.card{background:var(--card);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);margin-bottom:16px}
+
+		.top-games{display:flex;gap:12px}
+		.game{flex:1;padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);display:flex;align-items:center;gap:12px}
+		.game .thumb{width:64px;height:64px;border-radius:8px;background:#0b1220;display:flex;align-items:center;justify-content:center;font-size:22px}
+		.game h3{margin:0;font-size:16px}
+		.game p{margin:0;color:var(--muted);font-size:13px}
+
+		/* right side menu */
+		.right{width:240px;flex:0 0 240px}
+		nav.menu{position:sticky;top:18px}
+		nav ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+		nav a{display:block;padding:10px 12px;border-radius:8px;color:var(--accent);text-decoration:none;background:linear-gradient(90deg,rgba(94,234,212,0.04),transparent)}
+
+		/* recommendation and generator */
+		.reco-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+		.reco{padding:12px;border-radius:10px;background:rgba(255,255,255,0.02)}
+
+		.profiles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+		.person{padding:12px;border-radius:10px;background:var(--glass);text-align:center}
+
+		/* footer */
+		footer{padding:14px;text-align:center;color:var(--muted);font-size:13px}
+
+		/* small screens */
+		@media (max-width:900px){.layout{flex-direction:column;padding:12px}.left,.right{width:100%}.right nav ul{flex-direction:row;overflow:auto}}
+	</style>
+</head>
+<body>
+	<header>
+		<h1>HomeWeb — Games</h1>
+		<div style="color:var(--muted)">Welcome back — quick access to games & profiles</div>
+	</header>
+
+	<main class="layout">
+		<aside class="left">
+			<div class="profile-card">
+				<div style="display:flex;gap:12px;align-items:center">
+					<div class="avatar">GM</div>
+					<div>
+						<div class="name">Griselda Maha</div>
+						<div class="bio">Casual gamer · strategy & puzzle fan</div>
+					</div>
+				</div>
+				<div class="stats">
+					<div class="stat"><div style="font-weight:700">128</div><div style="font-size:12px;color:var(--muted)">Hours</div></div>
+					<div class="stat"><div style="font-weight:700">24</div><div style="font-size:12px;color:var(--muted)">Games</div></div>
+				</div>
+			</div>
+		</aside>
+
+		<section class="center">
+			<div class="card">
+				<h2 style="margin-top:0">Top 3 Games Played</h2>
+				<div class="top-games">
+					<div class="game">
+						<div class="thumb">🎮</div>
+						<div>
+							<h3>1. Celestial Quest</h3>
+							<p>Adventure · 42 hrs</p>
+						</div>
+					</div>
+					<div class="game">
+						<div class="thumb">🧩</div>
+						<div>
+							<h3>2. Mind Mosaic</h3>
+							<p>Puzzle · 30 hrs</p>
+						</div>
+					</div>
+					<div class="game">
+						<div class="thumb">⚔️</div>
+						<div>
+							<h3>3. Arena Legends</h3>
+							<p>Action · 24 hrs</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="card" id="recommendation">
+				<h2 style="margin-top:0">Game Recommendation</h2>
+				<p class="bio">Hand-picked suggestions based on your playtime and preferences.</p>
+				<div class="reco-list" id="recoList">
+					<!-- recommendation cards will be injected by JS -->
+				</div>
+			</div>
+
+			<div class="card">
+				<h2 style="margin-top:0">Random Game Generator</h2>
+				<p class="bio">Click the button to discover a random game from our list.</p>
+				<div style="display:flex;gap:10px;align-items:center">
+					<button id="randBtn" style="background:var(--accent);border:none;padding:10px 14px;border-radius:8px;cursor:pointer">Generate Random Game</button>
+					<div id="randResult" style="font-weight:700"></div>
+				</div>
+			</div>
+
+			<div class="card" id="profiles">
+				<h2 style="margin-top:0">Profiles (5 People)</h2>
+				<div class="profiles-grid" id="peopleGrid">
+					<!-- people injected by JS -->
+				</div>
+			</div>
+		</section>
+
+		<aside class="right">
+			<nav class="menu">
+				<ul>
+					<li><a href="#recommendation">Recommendations</a></li>
+					<li><a href="#profiles">Profiles</a></li>
+					<li><a href="#">Top Games</a></li>
+					<li><a href="#" id="menuRandom">Random Game</a></li>
+				</ul>
+			</nav>
+		</aside>
+	</main>
+
+	<footer>
+		Built for demo — single-file layout with simple JS interactions.
+	</footer>
+
+	<script>
+		// Data
+		const recommendations = [
+			{title:'Skyward Saga', genre:'RPG', hrs:5},
+			{title:'Neon Drift', genre:'Racing', hrs:2},
+			{title:'Stonebound', genre:'Strategy', hrs:8},
+			{title:'Puzzle Bloom', genre:'Puzzle', hrs:3},
+			{title:'Mystic Shores', genre:'Adventure', hrs:6},
+			{title:'Bricksmith', genre:'Sandbox', hrs:1}
+		];
+
+		const people = [
+			{name:'Aisha Rahman', role:'Streamer', bio:'FPS specialist, huge on live events.'},
+			{name:'Budi Santoso', role:'Developer', bio:'Indie dev, loves pixel art.'},
+			{name:'Carlos Vega', role:'Reviewer', bio:'Covers strategy and simulation.'},
+			{name:'Dewi Lestari', role:'Designer', bio:'Gameplay & UX focused.'},
+			{name:'Ethan Park', role:'Collector', bio:'Collector of retro titles.'}
+		];
+
+		// Render recommendations
+		const recoList = document.getElementById('recoList');
+		recommendations.forEach((g)=>{
+			const div = document.createElement('div');
+			div.className = 'reco';
+			div.innerHTML = `<strong>${g.title}</strong><div style="color:var(--muted);font-size:13px">${g.genre} · ${g.hrs} hrs</div>`;
+			recoList.appendChild(div);
+		});
+
+		// Random generator
+		const randBtn = document.getElementById('randBtn');
+		const randResult = document.getElementById('randResult');
+		randBtn.addEventListener('click', ()=>{
+			const pool = recommendations.map(r=>r.title);
+			const pick = pool[Math.floor(Math.random()*pool.length)];
+			randResult.textContent = pick;
+			// tiny confetti effect: flash background
+			randResult.animate([{opacity:0},{opacity:1}],{duration:300});
+		});
+
+		// Render people profiles
+		const peopleGrid = document.getElementById('peopleGrid');
+		people.forEach((p, i)=>{
+			const el = document.createElement('div');
+			el.className = 'person';
+			const initials = p.name.split(' ').map(s=>s[0]).slice(0,2).join('');
+			el.innerHTML = `<div style="width:56px;height:56px;border-radius:999px;margin:0 auto;background:linear-gradient(90deg,#60a5fa,#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700;color:#021">${initials}</div>
+				<div style="font-weight:600;margin-top:8px">${p.name}</div>
+				<div style="color:var(--muted);font-size:13px">${p.role}</div>
+				<div style="margin-top:8px;color:var(--muted);font-size:13px">${p.bio}</div>`;
+			peopleGrid.appendChild(el);
+		});
+
+		// menu Random scroll-to behaviour
+		document.getElementById('menuRandom').addEventListener('click', (e)=>{
+			e.preventDefault();
+			document.getElementById('randResult').scrollIntoView({behavior:'smooth',block:'center'});
+			document.getElementById('randBtn').focus();
+		});
+	</script>
+</body>
+</html>
