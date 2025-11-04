@@ -1,208 +1,382 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>HomeWeb - Games</title>
-	<style>
-		:root{
-			--bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#5eead4;
-			--glass: rgba(255,255,255,0.03);
-		}
-		*{box-sizing:border-box}
-		body{margin:0;font-family:Inter,Segoe UI,Arial;background:linear-gradient(180deg,#071028 0%, #091427 100%);color:#e6eef6}
-		header{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;border-bottom:1px solid rgba(255,255,255,0.04)}
-		header h1{margin:0;font-size:20px}
-		.layout{display:flex;gap:20px;padding:20px;max-width:1200px;margin:18px auto}
-		/* left profile */
-		.left{width:220px;flex:0 0 220px}
-		.profile-card{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-		.avatar{width:72px;height:72px;border-radius:999px;background:linear-gradient(135deg,var(--accent),#60a5fa);display:flex;align-items:center;justify-content:center;font-weight:700;color:#012; font-size:24px}
-		.name{margin-top:10px;font-weight:600}
-		.bio{color:var(--muted);font-size:13px;margin-top:6px}
-		.stats{display:flex;gap:8px;margin-top:12px}
-		.stat{background:var(--glass);padding:8px;border-radius:8px;flex:1;text-align:center}
-
-		/* center content */
-		.center{flex:1;min-width:0}
-		.card{background:var(--card);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);margin-bottom:16px}
-
-		.top-games{display:flex;gap:12px}
-		.game{flex:1;padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);display:flex;align-items:center;gap:12px}
-		.game .thumb{width:64px;height:64px;border-radius:8px;background:#0b1220;display:flex;align-items:center;justify-content:center;font-size:22px}
-		.game h3{margin:0;font-size:16px}
-		.game p{margin:0;color:var(--muted);font-size:13px}
-
-		/* right side menu */
-		.right{width:240px;flex:0 0 240px}
-		nav.menu{position:sticky;top:18px}
-		nav ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
-		nav a{display:block;padding:10px 12px;border-radius:8px;color:var(--accent);text-decoration:none;background:linear-gradient(90deg,rgba(94,234,212,0.04),transparent)}
-
-		/* recommendation and generator */
-		.reco-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-		.reco{padding:12px;border-radius:10px;background:rgba(255,255,255,0.02)}
-
-		.profiles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
-		.person{padding:12px;border-radius:10px;background:var(--glass);text-align:center}
-
-		/* footer */
-		footer{padding:14px;text-align:center;color:var(--muted);font-size:13px}
-
-		/* small screens */
-		@media (max-width:900px){.layout{flex-direction:column;padding:12px}.left,.right{width:100%}.right nav ul{flex-direction:row;overflow:auto}}
-	</style>
+  <meta charset="utf-8" />
+  <title>RobloxZone base</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
 </head>
 <body>
-	<header>
-		<h1>HomeWeb — Games</h1>
-		<div style="color:var(--muted)">Welcome back — quick access to games & profiles</div>
-	</header>
 
-	<main class="layout">
-		<aside class="left">
-			<div class="profile-card">
-				<div style="display:flex;gap:12px;align-items:center">
-					<div class="avatar">GM</div>
-					<div>
-						<div class="name">Griselda Maha</div>
-						<div class="bio">Casual gamer · strategy & puzzle fan</div>
-					</div>
-				</div>
-				<div class="stats">
-					<div class="stat"><div style="font-weight:700">128</div><div style="font-size:12px;color:var(--muted)">Hours</div></div>
-					<div class="stat"><div style="font-weight:700">24</div><div style="font-size:12px;color:var(--muted)">Games</div></div>
-				</div>
-			</div>
-		</aside>
+  <!-- Header area -->
+  <header>
+    <button id="aboutBtn">About Us</button>
+    <h1 id="brand">RobloxZone</h1>
+    <button id="menuBtn">Menu</button>
+  </header>
 
-		<section class="center">
-			<div class="card">
-				<h2 style="margin-top:0">Top 3 Games Played</h2>
-				<div class="top-games">
-					<div class="game">
-						<div class="thumb">🎮</div>
-						<div>
-							<h3>1. Celestial Quest</h3>
-							<p>Adventure · 42 hrs</p>
-						</div>
-					</div>
-					<div class="game">
-						<div class="thumb">🧩</div>
-						<div>
-							<h3>2. Mind Mosaic</h3>
-							<p>Puzzle · 30 hrs</p>
-						</div>
-					</div>
-					<div class="game">
-						<div class="thumb">⚔️</div>
-						<div>
-							<h3>3. Arena Legends</h3>
-							<p>Action · 24 hrs</p>
-						</div>
-					</div>
-				</div>
-			</div>
+  <!-- Simple dropdown menu -->
+  <nav id="mainMenu" hidden>
+    <ul>
+      <li><button data-page="home">Home</button></li>
+      <li><button data-page="top3">Top 3 Game</button></li>
+      <li><button data-page="recommendation">Roblox Recommendation</button></li>
+      <li><button data-page="random">Random Roblox Generator</button></li>
+      <li><button data-page="profile">Profile</button></li>
+    </ul>
+  </nav>
 
-			<div class="card" id="recommendation">
-				<h2 style="margin-top:0">Game Recommendation</h2>
-				<p class="bio">Hand-picked suggestions based on your playtime and preferences.</p>
-				<div class="reco-list" id="recoList">
-					<!-- recommendation cards will be injected by JS -->
-				</div>
-			</div>
+  <!-- Pages container -->
+  <main>
+    <!-- Home -->
+    <section id="homePage">
+      <h2>Selamat datang</h2>
+      <p>Selamat datang di RobloxZone. Temukan rekomendasi game Roblox yang sesuai mood mu</p>
+    </section>
 
-			<div class="card">
-				<h2 style="margin-top:0">Random Game Generator</h2>
-				<p class="bio">Click the button to discover a random game from our list.</p>
-				<div style="display:flex;gap:10px;align-items:center">
-					<button id="randBtn" style="background:var(--accent);border:none;padding:10px 14px;border-radius:8px;cursor:pointer">Generate Random Game</button>
-					<div id="randResult" style="font-weight:700"></div>
-				</div>
-			</div>
+    <!-- Top 3 -->
+    <section id="top3Page" hidden>
+      <h2>Top 3 Rekomendasi Game Roblox</h2>
+      <div id="top3List"></div>
+    </section>
 
-			<div class="card" id="profiles">
-				<h2 style="margin-top:0">Profiles (5 People)</h2>
-				<div class="profiles-grid" id="peopleGrid">
-					<!-- people injected by JS -->
-				</div>
-			</div>
-		</section>
+    <!-- Recommendation with genre list -->
+    <section id="recommendationPage" hidden>
+      <h2>Roblox Recommendation</h2>
+      <p>Pilih genre</p>
+      <ul id="genreList"></ul>
+      <div id="genreContent" hidden>
+        <h3 id="genreTitle"></h3>
+        <div id="genreGames"></div>
+        <button id="backToGenres">Kembali ke daftar genre</button>
+      </div>
+    </section>
 
-		<aside class="right">
-			<nav class="menu">
-				<ul>
-					<li><a href="#recommendation">Recommendations</a></li>
-					<li><a href="#profiles">Profiles</a></li>
-					<li><a href="#">Top Games</a></li>
-					<li><a href="#" id="menuRandom">Random Game</a></li>
-				</ul>
-			</nav>
-		</aside>
-	</main>
+    <!-- Random generator -->
+    <section id="randomPage" hidden>
+      <h2>Random Roblox Generator</h2>
+      <button id="generateBtn">Generate Game Random</button>
+      <div id="randomResult"></div>
+    </section>
 
-	<footer>
-		Built for demo — single-file layout with simple JS interactions.
-	</footer>
+    <!-- Profile page -->
+    <section id="profilePage" hidden>
+      <h2>Profil Tim</h2>
+      <div id="profiles"></div>
+    </section>
+  </main>
 
-	<script>
-		// Data
-		const recommendations = [
-			{title:'Skyward Saga', genre:'RPG', hrs:5},
-			{title:'Neon Drift', genre:'Racing', hrs:2},
-			{title:'Stonebound', genre:'Strategy', hrs:8},
-			{title:'Puzzle Bloom', genre:'Puzzle', hrs:3},
-			{title:'Mystic Shores', genre:'Adventure', hrs:6},
-			{title:'Bricksmith', genre:'Sandbox', hrs:1}
-		];
+  <script>
+    // ===== data =====
+    // contoh game list. edit tambah hapus sesuai kebutuhan
+    const GAMES = [
+      {
+        id: 'g1',
+        name: 'Adrift Isle',
+        description: 'Petualangan eksplorasi pulau pulau dengan quest ringan',
+        genre: 'Adventure',
+        logo: svgPlaceholder('AI'),
+        robloxUrl: 'https://www.roblox.com/games/1'
+      },
+      {
+        id: 'g2',
+        name: 'Cafe Life',
+        description: 'Simulasi hidup santai dan bangun kafe impian',
+        genre: 'Lifestyle',
+        logo: svgPlaceholder('CL'),
+        robloxUrl: 'https://www.roblox.com/games/2'
+      },
+      {
+        id: 'g3',
+        name: 'Haunted Hollow',
+        description: 'Horror experience yang bikin jantung deg degan',
+        genre: 'Horror',
+        logo: svgPlaceholder('HH'),
+        robloxUrl: 'https://www.roblox.com/games/3'
+      },
+      {
+        id: 'g4',
+        name: 'Super Simulator X',
+        description: 'Simulator dengan progression yang addicting',
+        genre: 'Simulator',
+        logo: svgPlaceholder('SS'),
+        robloxUrl: 'https://www.roblox.com/games/4'
+      },
+      {
+        id: 'g5',
+        name: 'Street Sports Arena',
+        description: 'Game sports cepat dan kompetitif',
+        genre: 'Sports',
+        logo: svgPlaceholder('SSa'),
+        robloxUrl: 'https://www.roblox.com/games/5'
+      },
+      {
+        id: 'g6',
+        name: 'Action Rush',
+        description: 'Fast paced action dengan mode co op',
+        genre: 'Action',
+        logo: svgPlaceholder('AR'),
+        robloxUrl: 'https://www.roblox.com/games/6'
+      },
+      {
+        id: 'g7',
+        name: 'Hidden Cove Adventures',
+        description: 'Adventure map dengan puzzle dan lore',
+        genre: 'Adventure',
+        logo: svgPlaceholder('HC'),
+        robloxUrl: 'https://www.roblox.com/games/7'
+      }
+    ];
 
-		const people = [
-			{name:'Aisha Rahman', role:'Streamer', bio:'FPS specialist, huge on live events.'},
-			{name:'Budi Santoso', role:'Developer', bio:'Indie dev, loves pixel art.'},
-			{name:'Carlos Vega', role:'Reviewer', bio:'Covers strategy and simulation.'},
-			{name:'Dewi Lestari', role:'Designer', bio:'Gameplay & UX focused.'},
-			{name:'Ethan Park', role:'Collector', bio:'Collector of retro titles.'}
-		];
+    // profil tim
+    const PROFILES = [
+      {
+        avatar: svgPlaceholder('PM'),
+        robloxId: 'RobloxID_PM',
+        fullName: 'Griselda Elizabeth Maha',
+        role: 'Product Manager',
+        instagram: 'https://instagram.com/example_pm'
+      },
+      {
+        avatar: svgPlaceholder('D1'),
+        robloxId: 'RobloxID_Anastasya',
+        fullName: 'Anastasya',
+        role: 'Developer',
+        instagram: 'https://instagram.com/example_dev1'
+      },
+      {
+        avatar: svgPlaceholder('D2'),
+        robloxId: 'RobloxID_Navisa',
+        fullName: 'Navisa',
+        role: 'Developer',
+        instagram: 'https://instagram.com/example_dev2'
+      },
+      {
+        avatar: svgPlaceholder('D3'),
+        robloxId: 'RobloxID_Afifah',
+        fullName: 'Afifah',
+        role: 'Developer',
+        instagram: 'https://instagram.com/example_dev3'
+      },
+      {
+        avatar: svgPlaceholder('D4'),
+        robloxId: 'RobloxID_Rafny',
+        fullName: 'Rafny',
+        role: 'Developer',
+        instagram: 'https://instagram.com/example_dev4'
+      }
+    ];
 
-		// Render recommendations
-		const recoList = document.getElementById('recoList');
-		recommendations.forEach((g)=>{
-			const div = document.createElement('div');
-			div.className = 'reco';
-			div.innerHTML = `<strong>${g.title}</strong><div style="color:var(--muted);font-size:13px">${g.genre} · ${g.hrs} hrs</div>`;
-			recoList.appendChild(div);
-		});
+    // daftar genre sesuai spec
+    const GENRES = ['Lifestyle', 'Horror', 'Adventure', 'Simulator', 'Sports', 'Action'];
 
-		// Random generator
-		const randBtn = document.getElementById('randBtn');
-		const randResult = document.getElementById('randResult');
-		randBtn.addEventListener('click', ()=>{
-			const pool = recommendations.map(r=>r.title);
-			const pick = pool[Math.floor(Math.random()*pool.length)];
-			randResult.textContent = pick;
-			// tiny confetti effect: flash background
-			randResult.animate([{opacity:0},{opacity:1}],{duration:300});
-		});
+    // ===== helpers =====
+    function svgPlaceholder(text) {
+      // simple SVG data URI to use as placeholder image
+      const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='120' height='80'>
+        <rect width='100%' height='100%' fill='#eee'/>
+        <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='18' fill='#666'>${escapeHtml(text)}</text>
+      </svg>`;
+      return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    }
+    function escapeHtml(s) {
+      return s.replace(/[&<>"']/g, function(c) {
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+      });
+    }
 
-		// Render people profiles
-		const peopleGrid = document.getElementById('peopleGrid');
-		people.forEach((p, i)=>{
-			const el = document.createElement('div');
-			el.className = 'person';
-			const initials = p.name.split(' ').map(s=>s[0]).slice(0,2).join('');
-			el.innerHTML = `<div style="width:56px;height:56px;border-radius:999px;margin:0 auto;background:linear-gradient(90deg,#60a5fa,#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700;color:#021">${initials}</div>
-				<div style="font-weight:600;margin-top:8px">${p.name}</div>
-				<div style="color:var(--muted);font-size:13px">${p.role}</div>
-				<div style="margin-top:8px;color:var(--muted);font-size:13px">${p.bio}</div>`;
-			peopleGrid.appendChild(el);
-		});
+    // ===== DOM refs =====
+    const menuBtn = document.getElementById('menuBtn');
+    const mainMenu = document.getElementById('mainMenu');
+    const aboutBtn = document.getElementById('aboutBtn');
+    const pages = {
+      home: document.getElementById('homePage'),
+      top3: document.getElementById('top3Page'),
+      recommendation: document.getElementById('recommendationPage'),
+      random: document.getElementById('randomPage'),
+      profile: document.getElementById('profilePage')
+    };
 
-		// menu Random scroll-to behaviour
-		document.getElementById('menuRandom').addEventListener('click', (e)=>{
-			e.preventDefault();
-			document.getElementById('randResult').scrollIntoView({behavior:'smooth',block:'center'});
-			document.getElementById('randBtn').focus();
-		});
-	</script>
+    // ===== nav and page logic =====
+    function showPage(key) {
+      Object.keys(pages).forEach(k => {
+        pages[k].hidden = (k !== key);
+      });
+      // hide menu when user navigates
+      mainMenu.hidden = true;
+    }
+
+    menuBtn.addEventListener('click', () => {
+      mainMenu.hidden = !mainMenu.hidden;
+    });
+
+    // menu buttons
+    mainMenu.querySelectorAll('button[data-page]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const page = btn.getAttribute('data-page');
+        showPage(page);
+      });
+    });
+
+    aboutBtn.addEventListener('click', () => {
+      showPage('profile');
+    });
+
+    // initialize default page
+    showPage('home');
+
+    // ===== top 3 rendering =====
+    function renderTop3() {
+      const container = document.getElementById('top3List');
+      container.innerHTML = '';
+      // simple rule: pick top 3 from start of GAMES array
+      const top = GAMES.slice(0, 3);
+      top.forEach(game => {
+        const el = document.createElement('article');
+        const img = document.createElement('img');
+        img.src = game.logo;
+        img.alt = game.name + ' logo';
+        img.width = 120;
+        img.height = 80;
+        const title = document.createElement('h3');
+        title.textContent = game.name;
+        const desc = document.createElement('p');
+        desc.textContent = game.description;
+        const link = document.createElement('a');
+        link.href = game.robloxUrl;
+        link.target = '_blank';
+        link.textContent = 'Buka di Roblox';
+        el.appendChild(img);
+        el.appendChild(title);
+        el.appendChild(desc);
+        el.appendChild(link);
+        container.appendChild(el);
+      });
+    }
+    renderTop3();
+
+    // ===== genres rendering =====
+    const genreList = document.getElementById('genreList');
+    const genreContent = document.getElementById('genreContent');
+    const genreTitle = document.getElementById('genreTitle');
+    const genreGames = document.getElementById('genreGames');
+    const backToGenres = document.getElementById('backToGenres');
+
+    function renderGenreList() {
+      genreList.innerHTML = '';
+      GENRES.forEach(g => {
+        const li = document.createElement('li');
+        const btn = document.createElement('button');
+        btn.textContent = g;
+        btn.addEventListener('click', () => openGenrePage(g));
+        li.appendChild(btn);
+        genreList.appendChild(li);
+      });
+    }
+    renderGenreList();
+
+    function openGenrePage(genre) {
+      genreTitle.textContent = 'Genre ' + genre;
+      genreGames.innerHTML = '';
+      const games = GAMES.filter(x => x.genre === genre);
+      if (games.length === 0) {
+        genreGames.textContent = 'Belum ada rekomendasi untuk genre ini';
+      } else {
+        games.forEach(game => {
+          const card = document.createElement('div');
+          const img = document.createElement('img');
+          img.src = game.logo;
+          img.alt = game.name + ' logo';
+          img.width = 120;
+          img.height = 80;
+          const h = document.createElement('h4');
+          h.textContent = game.name;
+          const p = document.createElement('p');
+          p.textContent = game.description;
+          const a = document.createElement('a');
+          a.href = game.robloxUrl;
+          a.target = '_blank';
+          a.textContent = 'Buka di Roblox';
+          card.appendChild(img);
+          card.appendChild(h);
+          card.appendChild(p);
+          card.appendChild(a);
+          genreGames.appendChild(card);
+        });
+      }
+      genreContent.hidden = false;
+      // optionally hide the genre list
+      genreList.hidden = true;
+    }
+
+    backToGenres.addEventListener('click', () => {
+      genreContent.hidden = true;
+      genreList.hidden = false;
+    });
+
+    // ===== random generator =====
+    const generateBtn = document.getElementById('generateBtn');
+    const randomResult = document.getElementById('randomResult');
+
+    generateBtn.addEventListener('click', () => {
+      if (GAMES.length === 0) {
+        randomResult.textContent = 'Daftar game kosong';
+        return;
+      }
+      const idx = Math.floor(Math.random() * GAMES.length);
+      const game = GAMES[idx];
+      randomResult.innerHTML = '';
+      const title = document.createElement('h3');
+      title.textContent = game.name;
+      const desc = document.createElement('p');
+      desc.textContent = game.description;
+      const link = document.createElement('a');
+      link.href = game.robloxUrl;
+      link.target = '_blank';
+      link.textContent = 'Buka di Roblox';
+      randomResult.appendChild(title);
+      randomResult.appendChild(desc);
+      randomResult.appendChild(link);
+    });
+
+    // ===== profiles rendering =====
+    function renderProfiles() {
+      const container = document.getElementById('profiles');
+      container.innerHTML = '';
+      PROFILES.forEach(p => {
+        const box = document.createElement('div');
+        const img = document.createElement('img');
+        img.src = p.avatar;
+        img.alt = p.fullName + ' avatar';
+        img.width = 120;
+        img.height = 80;
+        const name = document.createElement('h4');
+        name.textContent = p.fullName;
+        const role = document.createElement('p');
+        role.textContent = p.role;
+        const rid = document.createElement('p');
+        rid.textContent = 'Roblox ID ' + p.robloxId;
+        const ig = document.createElement('a');
+        ig.href = p.instagram;
+        ig.target = '_blank';
+        ig.textContent = 'Instagram';
+        box.appendChild(img);
+        box.appendChild(name);
+        box.appendChild(role);
+        box.appendChild(rid);
+        box.appendChild(ig);
+        container.appendChild(box);
+      });
+    }
+    renderProfiles();
+
+    // small UX improvement
+    // when user navigates to recommendation page, ensure genre content reset
+    document.querySelector('button[data-page="recommendation"]').addEventListener('click', () => {
+      genreContent.hidden = true;
+      genreList.hidden = false;
+    });
+
+    // End of script
+  </script>
 </body>
 </html>
